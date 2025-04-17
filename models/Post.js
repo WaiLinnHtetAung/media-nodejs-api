@@ -12,6 +12,8 @@ const PostSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
 })
 
+PostSchema.index({tag:1, author:1, category:1})
+
 const Post = Mongo.model("posts", PostSchema);
 
 export default Post;
