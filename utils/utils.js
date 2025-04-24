@@ -18,6 +18,10 @@ export const Encoder = {
     compare: (plain, hash) => bcrypt.compareSync(plain, hash),
 }
 
+export const Msg = (res, msg = '', result= {}) => {
+    res.status(200).json({ok: true, msg, result});
+}
+
 export const genRandom = (min, max) => {
     return Math.floor(Math.random() * (max - min)) + min;
 }
