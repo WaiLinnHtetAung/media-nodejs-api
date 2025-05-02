@@ -5,7 +5,7 @@ const UserSchema = new Schema({
     phone: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     displayName: {type: String, required: true},
-    role: {type: Number, default: 2},
+    role: {type: Number, default: 2}, // 0 -> owner, 1 -> author, 2 -> reader/user
     profile: {type: String, required: true},
     createdAt: {type: Date, default: Date.now},
 })

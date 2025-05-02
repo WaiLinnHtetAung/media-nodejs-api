@@ -1,5 +1,6 @@
 import Redis from "ioredis";
 import bcrypt from "bcryptjs";
+import JWT from "jsonwebtoken";
 
 const redis = new Redis();
 
@@ -16,6 +17,10 @@ export const RDB = {
 export const Encoder = {
     encode: (password) => bcrypt.hashSync(password, 10),
     compare: (plain, hash) => bcrypt.compareSync(plain, hash),
+}
+
+export const TOKEN = {
+    makeToken: payload => JWT.sign({id: payload}, process.env.SECRET_KEY, {expiresIn: '1h'}),
 }
 
 export const Msg = (res, msg = '', result= {}) => {
