@@ -31,4 +31,15 @@ const getCacheUser = async(key) => {
     return user;
 }
 
-export default {getByName, getByPhone, storeUser, setCacheUser, getCacheUser};
+const getUsers = async(pageIndex) => {
+    let perPage = 10;
+
+    // get with pagination
+    await User.find().skip(pageIndex * perPage).sort({createdAt: -1}).limit(perPage);
+}
+
+const chnageRole = async(id, role) => {
+    await User.findByIdAndUpdate(id, {role})
+}
+
+export default {getById, getByName, getByPhone, storeUser, setCacheUser, getCacheUser, getUsers, chnageRole};

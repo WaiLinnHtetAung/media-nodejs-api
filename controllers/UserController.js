@@ -46,4 +46,29 @@ const login = async (req, res, next) => {
     Msg(res, "Login successfully.", token);
 }
 
-export default {register, login}
+const getUsers = async(req, res, next) => {
+    let pageIndex = req.params.pageIndex;
+    let users = await userService.getUsers(pageIndex);
+
+    Msg(res, `Page Index ${pageIndex}`, users);
+}
+
+const getUser = async (req, res, next) => {
+    let userId = req.params.id;
+    let user = await userService.getById(userId);
+
+    Msg(res, `Single user`, user);
+}
+
+const changeRole = async (req, res, next) => {
+    const {userId, role} = req.body;
+    const user = await userService.getById(userId);
+
+    if(user) {
+        await userService.chnageRole(user._id, role)
+    } else {
+        next(new Error("No user with that id"));
+    }
+}
+
+export default { register, login, getUsers, getUser }

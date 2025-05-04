@@ -1,4 +1,5 @@
 import JWT from 'jsonwebtoken';
+import UserService from "../services/userService.js";
 
 export const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -22,17 +23,17 @@ export const verifyToken = (req, res, next) => {
 
         console.log("Ready to continue")
 
-        // let userId = decoded.id;
-        // let user = await UserService.getCacheUser(userId);
-        //
-        // if(!user) {
-        //     next(new Error("User does not exist"));
-        //     return;
-        // }
-        //
-        // req.userId = userId;
-        // req.user = user;
-        // next();
+        let userId = decoded.id;
+        let user = await UserService.getCacheUser(userId);
+
+        if(!user) {
+            next(new Error("User does not exist"));
+            return;
+        }
+
+        req.userId = userId;
+        req.user = user;
+        next();
     })
 }
 
