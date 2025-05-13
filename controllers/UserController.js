@@ -71,4 +71,4 @@ const changeRole = async (req, res, next) => {
     }
 }
 
-export default { register, login, getUsers, getUser }
+export default { register, login, getUsers, getUser, changeRole }

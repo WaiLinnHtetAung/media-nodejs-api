@@ -35,7 +35,8 @@ const getUsers = async(pageIndex) => {
     let perPage = 10;
 
     // get with pagination
-    await User.find().skip(pageIndex * perPage).sort({createdAt: -1}).limit(perPage);
+    let users = await User.find().skip(pageIndex * perPage).sort({createdAt: -1}).limit(perPage);
+    return users;
 }
 
 const chnageRole = async(id, role) => {
