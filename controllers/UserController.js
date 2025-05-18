@@ -66,6 +66,7 @@ const changeRole = async (req, res, next) => {
 
     if(user) {
         await userService.chnageRole(user._id, role)
+        Msg(res, 'Role has changed', user)
     } else {
         next(new Error("No user with that id"));
     }

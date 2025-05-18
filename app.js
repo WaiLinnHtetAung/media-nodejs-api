@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import fileUpload from 'express-fileupload'
 
 import userRoutes from './routes/userRoutes.js'
+import categoryRoutes from './routes/categoryRoutes.js'
 
 const app = express()
 const server = http.createServer(app);
@@ -16,6 +17,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(fileUpload())
 
 app.use('/users', userRoutes);
+app.use('/category', categoryRoutes);
 
 app.use((error, req, res, next) => {
     res.status(400).json({ok: false, error: error.message});
