@@ -7,5 +7,7 @@ const router = express.Router();
 
 router.get('/', CategoryController.index);
 router.post('/', verifyToken, validateRole(0), saveSingleFile, CategoryController.store);
+router.patch('/update/:id', verifyToken, validateRole(0), CategoryController.update);
+router.delete('/:id', verifyToken, validateRole(0), CategoryController.drop);
 
 export default router;

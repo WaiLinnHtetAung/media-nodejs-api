@@ -1,5 +1,6 @@
 import {dirname} from 'path';
 import {fileURLToPath} from 'url';
+import fs from 'fs';
 
 const genFileName = (filename) => (new Date().valueOf() + '_' + filename).replace(/\s/g, '_');
 
