@@ -4,6 +4,7 @@ import {verifyToken, validateRole, validateStaff, validateBody} from "../middlew
 import userService from "../services/userService.js"
 import userSchema from "./schemas/userSchema.js";
 import categoryService from "../services/categoryService.js"
+import tagService from "../services/tagService.js";
 
 export {
     saveSingleFile,
@@ -26,4 +27,5 @@ export {
     userSchema,
 
     categoryService,
+    tagService
 }

@@ -4,6 +4,10 @@ const getById = async (id) => {
     return await Category.findById(id);
 }
 
+const getByName = async(name) => {
+    return await Category.findOne({name})
+}
+
 const getCategories = async(req,res)=>{
     return await Category.find();
 }
@@ -22,6 +26,7 @@ const drop = async(id) => {
 
 export default {
     getById,
+    getByName,
     getCategories,
     storeCategory,
     updateCategory,
