@@ -1,7 +1,7 @@
 import express from 'express';
 import TagController from "../controllers/TagController.js";
 import {verifyToken, validateRole, validateBody} from "../middleware/verifyToken.js";
-import tagSchema from "../utils/schemas/tagSchema.js";
+import {tagSchema} from "../utils/facades.js";
 
 const router = express.Router();
 

@@ -21,8 +21,6 @@ export const verifyToken = (req, res, next) => {
             return;
         }
 
-        console.log("Ready to continue")
-
         let userId = decoded.id;
         let user = await UserService.getCacheUser(userId);
 
@@ -40,7 +38,7 @@ export const verifyToken = (req, res, next) => {
 export const validateRole = (role) => {
     return (req, res, next) => {
         if(req.user.role !== role) {
-            next(new Error("You do not have permission."));
+            next(new Error("You do not have permissions."));
             return;
         }
 
