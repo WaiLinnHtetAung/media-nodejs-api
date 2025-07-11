@@ -1,4 +1,15 @@
-import {Msg, postService} from "../utils/facades.js";
+import {deleteFileWithLink, Msg, postService} from "../utils/facades.js";
+
+const index = async(req, res, next) => {
+    let {index} = req.params;
+    let posts = await postService.getPosts(index);
+
+    if(posts) {
+        Msg(res, "Paginated posts", posts);
+    } else {
+        next(new Error("Something went wrong"));
+    }
+}
 
 const store = async (req, res, next) => {
     req.body['author'] = req.userId;
@@ -11,6 +22,25 @@ const store = async (req, res, next) => {
 
 }
 
+const update = async (req, res, next) => {
+    let payload = req.body;
+    let {id} = req.params;
+
+    let post = await postService.getById(id);
+
+    if(post) {
+        if(Object.keys(payload).includes('images')) {
+            post.images.forEach(image => deleteFileWithLink(image))
+        }
+        let result = await postService.update(id, payload);
+        Msg(res, "success", result)
+    }else {
+        next(new Error("No Post Found"));
+    }
+}
+
 export default {
-    store
+    index,
+    store,
+    update,
 }
