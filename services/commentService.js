@@ -1,9 +1,12 @@
 import Comment from "../models/Comment.js";
 
-const getByPost = async (postId) => {
+const getByPost = async (role, postId) => {
     let result = null;
     try{
-        result = await Comment.find({postId});
+        switch (role) {
+            case 0 : result = await Comment.find({postId}); break;
+            default : result = await Comment.find({postId, status: 'ACCEPT'}); break;
+        }
     } catch (err) {
         console.error(err);
     } finally {
@@ -23,7 +26,19 @@ const store = async(payload) => {
     }
 }
 
+const update = async(commentId, payload) => {
+    let result = null;
+    try {
+        result = await Comment.findByIdAndUpdate(commentId, payload, {new: true})
+    } catch (error) {
+        console.log(error);
+    } finally {
+        return result;
+    }
+}
+
 export default {
     getByPost,
-    store
+    store,
+    update,
 }

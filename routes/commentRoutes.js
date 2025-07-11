@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get('/:id', verifyToken, CommentController.getByPost);
 router.post('/', verifyToken, saveSingleFile, CommentController.store);
+router.post('/:id', verifyToken, CommentController.update);
 
 export default router;

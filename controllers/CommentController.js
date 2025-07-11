@@ -2,8 +2,8 @@ import {commentService, Msg} from "../utils/facades.js";
 
 const getByPost = async(req,res,next) => {
     let {id} = req.params;
-
-    let comments = await commentService.getByPost(id);
+    let role = req.user.role;
+    let comments = await commentService.getByPost(role, id);
 
     if(comments) {
         Msg(res, "comment by post", comments);
@@ -28,7 +28,17 @@ const store = async(req,res,next) => {
     }
 }
 
+const update = async(req,res,next) => {
+    let {id: commentId} = req.params;
+    let {status} = req.body;
+
+    let updatedComment = await commentService.update(commentId, {status});
+
+    Msg(res, "comment updated", updatedComment);
+}
+
 export default {
     getByPost,
-    store
+    store,
+    update,
 }
