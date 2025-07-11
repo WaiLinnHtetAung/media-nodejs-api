@@ -39,8 +39,58 @@ const update = async (req, res, next) => {
     }
 }
 
+const drop = async(req, res, next) => {
+    let {id} = req.params;
+    let post = await postService.getById(id);
+
+    if(post) {
+        post.images.forEach(image => deleteFileWithLink(image))
+        await postService.drop(id);
+        Msg(res, "success", {})
+    } else {
+        next(new Error("No Post Found"));
+    }
+}
+
+const getByTag = async(req, res, next) => {
+    let {id, index} = req.params;
+
+    let posts = await postService.getByTag(id, index);
+    if(posts) {
+        Msg(res, "Posts by tag", posts);
+    } else {
+        next(new Error("No Post Found"));
+    }
+}
+
+const getByCategory = async(req, res, next) => {
+    let {id, index} = req.params;
+
+    let posts = await postService.getByCategory(id, index);
+    if(posts) {
+        Msg(res, "Posts by category", posts);
+    } else {
+        next(new Error("No Post Found"));
+    }
+}
+
+const getByAuthor = async(req, res, next) => {
+    let {id, index} = req.params;
+
+    let posts = await postService.getByAuthor(id, index);
+    if(posts) {
+        Msg(res, "Posts by author", posts);
+    } else {
+        next(new Error("No Post Found"));
+    }
+}
+
 export default {
     index,
     store,
     update,
+    drop,
+    getByTag,
+    getByCategory,
+    getByAuthor,
 }

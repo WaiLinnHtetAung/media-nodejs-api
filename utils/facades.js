@@ -8,6 +8,7 @@ import tagSchema from "./schemas/tagSchema.js"
 import categoryService from "../services/categoryService.js"
 import tagService from "../services/tagService.js";
 import postService from "../services/postService.js"
+import commentService from "../services/commentService.js"
 
 export {
     saveSingleFile,
@@ -34,4 +35,5 @@ export {
     categoryService,
     tagService,
     postService,
+    commentService
 }
