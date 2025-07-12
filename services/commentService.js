@@ -37,8 +37,20 @@ const update = async(commentId, payload) => {
     }
 }
 
+const drop = async(id) => {
+    let result = null;
+    try{
+        result = await Comment.findByIdAndDelete(id);
+    } catch (error) {
+        console.log(error);
+    } finally {
+        return result;
+    }
+}
+
 export default {
     getByPost,
     store,
     update,
+    drop
 }

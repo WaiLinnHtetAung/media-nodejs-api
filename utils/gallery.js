@@ -20,12 +20,16 @@ const saveFile = (file) => {
 }
 
 export const saveSingleFile = async (req, res, next) => {
-    if(req.files && req.files.file) {
-        let file = req.files.file;
-        req.body.image = saveFile(file);
-        next();
+    if(req.files) {
+        if(req.files.file) {
+            let file = req.files.file;
+            req.body.image = saveFile(file);
+            next();
+        }else {
+            next (new Error('File not found'));
+        }
     } else {
-        next (new Error('File not found'));
+        next();
     }
 }
 

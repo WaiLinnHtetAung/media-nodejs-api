@@ -37,8 +37,16 @@ const update = async(req,res,next) => {
     Msg(res, "comment updated", updatedComment);
 }
 
+const drop = async(req,res,next) => {
+    let {id} = req.params;
+
+    await commentService.drop(id)
+    Msg(res, "comment dropped", id);
+}
+
 export default {
     getByPost,
     store,
     update,
+    drop
 }

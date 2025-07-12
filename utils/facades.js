@@ -9,6 +9,7 @@ import categoryService from "../services/categoryService.js"
 import tagService from "../services/tagService.js";
 import postService from "../services/postService.js"
 import commentService from "../services/commentService.js"
+import advertisementService from "../services/advertisementService.js";
 
 export {
     saveSingleFile,
@@ -35,5 +36,6 @@ export {
     categoryService,
     tagService,
     postService,
-    commentService
+    commentService,
+    advertisementService,
 }

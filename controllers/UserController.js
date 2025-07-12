@@ -53,6 +53,13 @@ const getUsers = async(req, res, next) => {
     Msg(res, `Page Index ${pageIndex}`, users);
 }
 
+const getUserDetail = async (req, res, next) => {
+    let userId = req.params.id;
+    let user = await userService.getById(userId);
+
+    Msg(res, `Single user`, user);
+}
+
 const getUser = async (req, res, next) => {
     let userId = req.params.id;
     let user = await userService.getById(userId);
@@ -72,4 +79,4 @@ const changeRole = async (req, res, next) => {
     }
 }
 
-export default { register, login, getUsers, getUser, changeRole }
+export default { register, login, getUsers, getUserDetail, getUser, changeRole }

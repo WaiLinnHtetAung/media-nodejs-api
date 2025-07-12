@@ -5,7 +5,6 @@ import {tagSchema} from "../utils/facades.js";
 
 const router = express.Router();
 
-router.get('/', TagController.index);
 router.post('/', validateBody(tagSchema.store), verifyToken, validateRole(0), TagController.store)
 router.get('/:id', verifyToken, TagController.getTag);
 router.patch('/:id', verifyToken, TagController.update);

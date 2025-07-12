@@ -9,6 +9,8 @@ import categoryRoutes from './routes/categoryRoutes.js'
 import tagRoutes from './routes/tagRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import commentRoutes from "./routes/commentRoutes.js";
+import advertisementRoutes from "./routes/advertisementRoutes.js";
+import apiRoutes from "./routes/apiRoutes.js";
 
 const app = express()
 const server = http.createServer(app);
@@ -24,6 +26,8 @@ app.use('/category', categoryRoutes);
 app.use('/tags', tagRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes)
+app.use('/advertisements', advertisementRoutes)
+app.use('/api', apiRoutes)
 
 app.use((error, req, res, next) => {
     res.status(400).json({ok: false, error: error.message});

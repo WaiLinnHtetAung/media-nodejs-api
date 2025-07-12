@@ -1,11 +1,10 @@
 import express from 'express';
-import {saveSingleFile, verifyToken} from "../utils/facades.js";
+import { validateRole, verifyToken} from "../utils/facades.js";
 import CommentController from "../controllers/CommentController.js";
 
 const router = express.Router();
 
-router.get('/:id', verifyToken, CommentController.getByPost);
-router.post('/', verifyToken, saveSingleFile, CommentController.store);
-router.post('/:id', verifyToken, CommentController.update);
+router.post('/:id', verifyToken, validateRole(0), CommentController.update);
+router.delete('/:id', verifyToken, validateRole(0), CommentController.drop);
 
 export default router;
